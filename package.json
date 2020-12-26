@@ -1,6 +1,6 @@
 {
-  "name": "tei-publisher-vscode",
-  "displayName": "tei-publisher-vscode",
+  "name": "my-tei-publisher-vscode",
+  "displayName": "my-tei-publisher-vscode",
   "description": "Visual Studio Code extension to support TEI editing",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
       "activitybar": [
         {
           "id": "teipublisher",
-          "title": "TEI Publisher Tools",
+          "title": "My TEI Publisher Tools",
           "icon": "media/logo.svg"
         }
       ]
@@ -44,7 +44,7 @@
         {
           "type": "webview",
           "id": "teipublisher.entityView",
-          "name": "TEI Entity Explorer"
+          "name": "MY TEI Entity Explorer"
         }
       ]
     },
@@ -180,6 +180,10 @@
               "template": {
                 "type": "string",
                 "description": "Template string used to construct the TEI element. May reference the ID to be inserted with ${id}, the external link with ${link} or the label with ${label}. It may also contain vscode snippet placeholders like ${0}."
+              },
+              "dseendpoint": {
+                "type": "string",
+                "description": "endpoint of dsebaseinstance"
               }
             }
           },
@@ -204,9 +208,16 @@
             },
             {
               "name": "organisations",
-              "label": "Organisations",
+              "label": "HANSI4everOrganisations",
               "plugin": "gnd",
               "template": "<orgName ref=\"${id}\">${0:$TM_SELECTED_TEXT}</orgName>"
+            },
+            {
+              "name": "people",
+              "label": "People-DSE",
+              "plugin": "dsebaseapp",
+              "template": "<rs type=\"person\" ref=\"#${id}\">${0:$TM_SELECTED_TEXT}</rs>",
+              "dseendpoint": "http://127.0.1.1:8080/exist/apps/schnitzler-briefe/ac/entity-ac.xql?query="
             }
           ]
         }

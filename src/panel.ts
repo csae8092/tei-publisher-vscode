@@ -4,6 +4,7 @@ import { Metagrid } from "./connectors/metagrid";
 import { GooglePlaces } from "./connectors/gplaces";
 import { GND } from "./connectors/gnd";
 import { GeoNames } from "./connectors/geonames";
+import { DseBaseApp } from "./connectors/dsebaseapp";
 import { Registry, RegistryResult, RegistryResultItem } from './registry';
 
 /**
@@ -69,6 +70,9 @@ export class RegistryPanel implements vscode.WebviewViewProvider {
 		configs.forEach((config) => {
 			let registry;
 			switch (config.plugin) {
+				case 'dsebaseapp':
+					registry = new DseBaseApp(config);
+					break;
 				case 'kbga':
 					registry = new KBGA(config);
 					break;
